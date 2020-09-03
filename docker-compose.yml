@@ -2,6 +2,7 @@ version: '3.0'
 
 volumes:
     prometheus_data: {}
+    grafana_data: {}
 
 services:
   prometheus:
@@ -19,4 +20,14 @@ services:
       - '--query.lookback-delta=90m'
     ports:
       - "9090:9090"
+    restart: unless-stopped
+  grafana:
+    image: grafana/grafana:7.1.5
+    container_name: grafana
+    environment:
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - 3000:3000
     restart: unless-stopped
