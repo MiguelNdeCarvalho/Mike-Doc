@@ -3,6 +3,7 @@ version: '3.0'
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    alertmanager_data: {}
 
 services:
   prometheus:
@@ -30,4 +31,16 @@ services:
       - grafana_data:/var/lib/grafana
     ports:
       - 3000:3000
+    restart: unless-stopped
+  alertmanager:
+    image: quay.io/prometheus/alertmanager:v0.21.0
+    container_name: alertmanager
+    volumes:
+      - alertmanager_data:/alertmanager
+      - ./alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    ports:
+      - 9093:9093
     restart: unless-stopped
