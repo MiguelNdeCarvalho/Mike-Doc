@@ -90,3 +90,12 @@ services:
     ports:
       - 9100:9100
     restart: unless-stopped
+  piholeexporter:
+    image: ekofr/pihole-exporter:0.0.9
+    container_name: piholeexporter
+    environment:
+      - PIHOLE_HOSTNAME=192.168.1.2
+      - PIHOLE_PASSWORD=mypassword
+      - INTERVAL=30s
+      - PORT=9617
+    restart: unless-stopped
