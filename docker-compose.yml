@@ -88,3 +88,7 @@ services:
       - INTERVAL=30s
       - PORT=9617
     restart: unless-stopped
+  speedtestexporter:
+    image: miguelndecarvalho/docker-speedtest_exporter
+    container_name: speedtestexporter
+    restart: unless-stopped
