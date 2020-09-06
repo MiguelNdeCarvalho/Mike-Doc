@@ -22,6 +22,12 @@ services:
     ports:
       - "9090:9090"
     restart: unless-stopped
+  influxdb:
+    image: influxdb:1.8.2
+    container_name: influxdb
+    volumes:
+      - /path/to/docker-influxdb/config-folder:/var/lib/influxdb
+    restart: unless-stopped
   grafana:
     image: grafana/grafana:7.1.5
     container_name: grafana
